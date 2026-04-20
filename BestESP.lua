@@ -11,7 +11,7 @@ getgenv.esptypes = {
     skeleton = true, --done
 }
 
-local levelpath = Players.Data.Level.Value
+local levelpath = LocalPlayer.Data.Level.Value
 
 -- // Services
 local Players = game:GetService("Players")
@@ -29,12 +29,12 @@ function ESP_API_LIBRARY:CreateESP(Target, Options)
     local ESP = Instance.new("BillboardGui", ESPFolder)
     ESP.Name = Target.Name .. "_ESP"
     ESP.Adornee = Target.Character and Target.Character:FindFirstChild("HumanoidRootPart") or Target:FindFirstChild("HumanoidRootPart")
-    ESP.Size = UDim
+    ESP.Size = UDim2.new(0, 200, 0, 50)
     ESP.AlwaysOnTop = true
 
 local NameLabel = Instance.new("TextLabel", ESP)
 NameLabel.Name = "Name"
-NameLabel.Size = UDim2.new(1, 0, 0.3,)
+NameLabel.Size = UDim2.new(1, 0, 0.3, 0)
 NameLabel.BackgroundTransparency = 1
 NameLabel.TextColor3 = Color3.new(1, 1, 1)
 NameLabel.TextStrokeTransparency = 0
@@ -54,7 +54,7 @@ HealthLabel.Text = "Health: " .. Target.Character.Humanoid.Health
 
 local DistanceLabel = Instance.new("TextLabel", ESP)
 DistanceLabel.Name = "Distance"
-DistanceLabel.Size = UDim2.new(1, 0, 0.3)
+DistanceLabel.Size = UDim2.new(1, 0, 0.3, 0)
 DistanceLabel.BackgroundTransparency = 1
 DistanceLabel.TextColor3 = Color3.new(1, 1, 1)
 DistanceLabel.TextStrokeTransparency = 0
@@ -114,32 +114,9 @@ local SkeletonJoints = {
 
 local TracerLogic = RunService.Heartbeat:Connect(function()
     if Target.Character and Target.Character:FindFirstChild("HumanoidRootPart") then
-        local StartPos = Camera.CFramde.Position)
+        local StartPos = Camera.CFrame.Position
         local EndPos = Target.Character.HumanoidRootPart.Position
-
-local TeamLogic = RunService.Heartbeat:Connect(function()
-    if Target.TeamColor == LocalPlayer.TeamColor then
-        Box.BorderColor3 = Color3.new(0, 1, 0)
-        Tracer.BorderColor3 = Color3.new(0, 1, 0)
-        Skeleton.BorderColor3 = Color3.new(0, 1, 0)
-    else
-        Box.BorderColor3 = Color3.new(1, 0, 0)
-        Tracer.BorderColor3 = Color3.new(1, 0, 0)
-        Skeleton.BorderColor3 = Color3.new(1, 0, 0)
-    end
-end)
-
-if Team is = {
-    "Pirate" then --Red ESP
-        Box.BorderColor3 = Color3.new(255, 255, 255)
-        Tracer.BorderColor3 = Color3.new(255, 255, 255)
-        Skeleton.BorderColor3 = Color3.new(255, 255, 255)
-    elseif Target.TeamColor == "Marine" then --Blue ESP
-        Box.BorderColor3 = Color3.new(0, 0, 255)
-        Tracer.BorderColor3 = Color3.new(0, 0, 255)
-        Skeleton.BorderColor3 = Color3.new(0, 0, 255)
-    }
-
+    end)
 
     RunService.Heartbeat:Connect(function()
         if Target.Character and Target.Character:FindFirstChild("HumanoidRootPart") then
